@@ -3,9 +3,9 @@ export const TEAM = [
   {
     nome: 'Pablo Bispo',
     papel: 'Gestão de produto',
-    headline: 'Head de IA na Angi Saúde · Cientista de Dados e AI Engineer',
+    headline: 'Senior AI Engineer | AI Architect',
     linkedin: 'https://www.linkedin.com/in/pablobispo/',
-    telefone: '5534998360511',
+    telefone: '',
   },
   { nome: 'Kauam', papel: 'Desenvolvimento', headline: '', linkedin: '', telefone: '' },
   { nome: 'Gisele', papel: 'Usuária-chave do negócio', headline: 'Médica cardiopediatra, 23 anos de prática', linkedin: '', telefone: '' },

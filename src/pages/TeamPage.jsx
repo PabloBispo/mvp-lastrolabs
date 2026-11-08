@@ -29,11 +29,13 @@ export default function TeamPage() {
               </div>
               <div className="min-w-0">
                 <h2 className="truncate text-lg font-semibold text-ink">{m.nome}</h2>
-                <p className="text-sm font-medium text-lastro-deep">{m.papel}</p>
+                <p className="text-sm text-ink-soft">
+                  <span className="font-medium text-lastro-deep">{m.papel}</span>
+                  {m.headline && <> · {m.headline}</>}
+                </p>
               </div>
             </div>
-            {m.headline && <p className="mt-4 text-sm text-ink-soft">{m.headline}</p>}
-            <div className="mt-auto flex flex-wrap gap-2 pt-5">
+            <div className="mt-auto flex flex-wrap gap-2 pt-4">
               {m.linkedin && (
                 <a href={m.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md bg-[#0A66C2] px-3 py-2 text-xs font-medium text-white hover:opacity-90">
                   <LinkedInIcon className="h-4 w-4" /> LinkedIn
