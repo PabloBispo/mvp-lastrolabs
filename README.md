@@ -57,7 +57,8 @@ src/
 │   ├── search/       SearchCard, FilterPanel, FormField
 │   ├── patients/     PatientsTable, PatientRow, LaudoCell, RowActions,
 │   │                 ColumnFilter, SortButton, TableHeaderCell,
-│   │                 SkeletonRows, PatientFormModal
+│   │                 SkeletonRows, PatientFormModal,
+│   │                 PatientCard, PatientCardList (versão celular/tablet)
 │   ├── pagination/   Pagination
 │   ├── ui/           Button, IconButton, TextInput, Select, StatusBadge,
 │   │                 Card, Modal, ConfirmDialog, Toast

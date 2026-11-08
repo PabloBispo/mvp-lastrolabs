@@ -7,6 +7,7 @@ import ConfirmDialog from './components/ui/ConfirmDialog.jsx';
 import { useToast } from './components/ui/Toast.jsx';
 import PatientsTable from './components/patients/PatientsTable.jsx';
 import PatientFormModal from './components/patients/PatientFormModal.jsx';
+import PatientCardList from './components/patients/PatientCardList.jsx';
 import Pagination from './components/pagination/Pagination.jsx';
 import usePatients from './hooks/usePatients.js';
 import useAsync from './hooks/useAsync.js';
@@ -47,6 +48,20 @@ export default function App() {
     p.reload();
   }, 'Dados restaurados');
 
+  // Props comuns à tabela (desktop) e à lista de cartões (celular/tablet).
+  const listProps = {
+    patients: p.pageItems,
+    loading: p.loading,
+    skeletonCount: p.pageSize,
+    sendingIds: p.sendingIds,
+    sort: p.sort,
+    columnFilters: p.columnFilters,
+    onColumnFiltersChange: p.setColumnFilters,
+    onEnviar: handleEnviar,
+    onEdit: setEditing,
+    onDelete: setDeleting,
+  };
+
   return (
     <AppLayout doctor={doctor.data} onSettings={() => setConfirmReset(true)}>
       <PageHeader
@@ -54,23 +69,20 @@ export default function App() {
         subtitle="Localizar paciente, enviar laudo, acompanhar gestão de envio de forma rápida"
       />
 
-      <div className="mt-6 space-y-6 lg:mt-8">
+      <div className="mt-5 space-y-5 sm:mt-6 sm:space-y-6 lg:mt-8">
       <SearchCard examTypes={examTypes.data} onSearch={p.search} />
 
       <Card className="p-4 lg:p-6">
-        <PatientsTable
-          patients={p.pageItems}
-          loading={p.loading}
-          skeletonCount={p.pageSize}
-          sendingIds={p.sendingIds}
-          sort={p.sort}
-          onSortChange={p.toggleSort}
-          columnFilters={p.columnFilters}
-          onColumnFiltersChange={p.setColumnFilters}
-          onEnviar={handleEnviar}
-          onEdit={setEditing}
-          onDelete={setDeleting}
-        />
+        {/* Tabela a partir de 1024px; cartões abaixo disso. */}
+        <div className="hidden lg:block">
+          <PatientsTable
+            {...listProps}
+            onSortChange={p.toggleSort}
+          />
+        </div>
+        <div className="lg:hidden">
+          <PatientCardList {...listProps} onSortSet={p.setSort} />
+        </div>
         <Pagination
           page={p.page}
           totalPages={p.totalPages}

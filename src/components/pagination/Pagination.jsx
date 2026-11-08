@@ -7,7 +7,7 @@ const SmallRight = (p) => <ChevronRightIcon className="h-3.5 w-3.5" {...p} />;
 
 /**
  * Rodapé da tabela em três blocos: contagem | páginas | itens por página.
- * Em telas estreitas os blocos quebram de linha.
+ * No celular a contagem fica numa linha própria e os demais blocos centralizados.
  */
 export default function Pagination({
   page,
@@ -23,8 +23,8 @@ export default function Pagination({
   const to = Math.min(page * pageSize, totalCount);
 
   return (
-    <nav className="mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3" aria-label="Paginação">
-      <p className="text-sm text-slate-500">
+    <nav className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 sm:justify-between" aria-label="Paginação">
+      <p className="w-full text-center text-sm text-slate-500 sm:w-auto sm:text-left">
         Mostrando <span className="font-medium text-slate-700">{from}–{to}</span> de{' '}
         <span className="font-medium text-slate-700">{totalCount}</span> pacientes
       </p>

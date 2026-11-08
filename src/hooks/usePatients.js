@@ -74,6 +74,7 @@ export default function usePatients({ initialPageSize = 4 } = {}) {
       setPageSize(n);
       setPage(1);
     },
+    setSort,
     toggleSort: (key) =>
       setSort((s) =>
         s.key !== key ? { key, dir: 'asc' } : s.dir === 'asc' ? { key, dir: 'desc' } : { key: null, dir: null },
