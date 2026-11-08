@@ -19,7 +19,17 @@ export default function TeamPage() {
   return (
     <>
       <PageHeader title="Nossa equipe" subtitle="Quem está construindo o Lastro, do problema validado à plataforma" />
-      <div className="mt-5 grid gap-4 sm:mt-6 sm:grid-cols-2 lg:mt-8 xl:grid-cols-3">
+      <figure className="mt-5 overflow-hidden rounded-2xl bg-white sm:mt-6 lg:mt-8">
+        <img
+          src="/equipe.jpg"
+          alt="Equipe Lastro.Labs no Hacka Unimed Uberlândia 2026"
+          className="aspect-[4/3] w-full object-cover sm:aspect-[16/9]"
+          style={{ objectPosition: 'center 35%' }}
+        />
+        <figcaption className="px-5 py-3 text-xs text-ink-soft">Hacka Unimed Uberlândia 2026 · Sebrae, 7 e 8 de novembro</figcaption>
+      </figure>
+
+      <div className="mt-5 grid gap-4 sm:mt-6 sm:grid-cols-2 xl:grid-cols-3">
         {TEAM.map((m) => (
           <Card key={m.nome} className="flex flex-col p-5 lg:p-6">
             <div className="flex items-center gap-4">
