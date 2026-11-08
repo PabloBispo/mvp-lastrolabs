@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 
-const norm = () => (window.location.pathname.replace(/\/+$/, '') === '/equipe' ? '/equipe' : '/');
+const ROUTES = ['/equipe', '/operadora'];
+const norm = () => {
+  const p = window.location.pathname.replace(/\/+$/, '');
+  return ROUTES.includes(p) ? p : '/';
+};
 
 /** Roteamento mínimo por caminho (/ e /equipe). A Vercel reescreve tudo para index.html (vercel.json). */
 export default function useHashRoute() {

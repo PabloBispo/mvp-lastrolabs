@@ -72,6 +72,16 @@ export const api = {
     return clone(findPatient(id));
   },
 
+  /** Decisão do analista da operadora: Aprovado ou Correção solicitada, com motivo. */
+  async decide(id, status, motivo = '') {
+    await wait();
+    const p = findPatient(id);
+    p.status = status;
+    p.decisao = { por: 'Juliana (regulação)', em: new Date().toISOString(), motivo };
+    persist();
+    return clone(p);
+  },
+
   async updatePatient(id, changes) {
     await wait();
     Object.assign(findPatient(id), changes, { id });
