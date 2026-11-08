@@ -3,7 +3,6 @@ import Card from '../components/ui/Card.jsx';
 import { TEAM } from '../data/team.js';
 
 const initials = (n) => n.split(' ').map((p) => p[0]).slice(0, 2).join('').toUpperCase();
-const fmtPhone = (d) => (d.length === 13 ? `+${d.slice(0, 2)} (${d.slice(2, 4)}) ${d.slice(4, 9)}-${d.slice(9)}` : `+${d}`);
 
 const LinkedInIcon = (p) => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...p}>
@@ -42,8 +41,8 @@ export default function TeamPage() {
                 </a>
               )}
               {m.telefone && (
-                <a href={`https://wa.me/${m.telefone}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md bg-[#25D366] px-3 py-2 text-xs font-medium text-white hover:opacity-90">
-                  <WhatsIcon className="h-4 w-4" /> {fmtPhone(m.telefone)}
+                <a href={`https://wa.me/${m.telefone}`} target="_blank" rel="noreferrer" title={`WhatsApp de ${m.nome}`} aria-label={`WhatsApp de ${m.nome}`} className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#25D366] text-white hover:opacity-90">
+                  <WhatsIcon className="h-4 w-4" />
                 </a>
               )}
               {!m.linkedin && !m.telefone && <span className="text-xs text-slate-400">Contato em breve</span>}
