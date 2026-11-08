@@ -8,6 +8,8 @@ import { useToast } from './components/ui/Toast.jsx';
 import PatientsTable from './components/patients/PatientsTable.jsx';
 import PatientFormModal from './components/patients/PatientFormModal.jsx';
 import UploadLaudoModal from './components/patients/UploadLaudoModal.jsx';
+import DuplicidadeModal from './components/patients/DuplicidadeModal.jsx';
+import DuplicidadeBanner from './components/patients/DuplicidadeBanner.jsx';
 import PatientCardList from './components/patients/PatientCardList.jsx';
 import Pagination from './components/pagination/Pagination.jsx';
 import usePatients from './hooks/usePatients.js';
@@ -16,7 +18,7 @@ import { api } from './mocks/api.js';
 
 const PAGE_SIZE_OPTIONS = [4, 10, 20];
 
-export default function App() {
+export default function App({ route = '/' }) {
   const notify = useToast();
   const doctor = useAsync(api.getDoctor);
   const examTypes = useAsync(api.getExamTypes, []);
@@ -25,6 +27,7 @@ export default function App() {
   const [editing, setEditing] = useState(null);
   const [deleting, setDeleting] = useState(null);
   const [uploading, setUploading] = useState(null);
+  const [dupOf, setDupOf] = useState(null);
   const [confirmReset, setConfirmReset] = useState(false);
 
   // Envolve uma ação da API mock com aviso de sucesso/erro.
@@ -61,11 +64,11 @@ export default function App() {
     onColumnFiltersChange: p.setColumnFilters,
     onEnviar: setUploading,
     onEdit: setEditing,
-    onDelete: setDeleting,
+    onDuplicidade: setDupOf,
   };
 
   return (
-    <AppLayout doctor={doctor.data} onSettings={() => setConfirmReset(true)}>
+    <AppLayout doctor={doctor.data} route={route} onSettings={() => setConfirmReset(true)}>
       <PageHeader
         title="Espaço do Médico"
         subtitle="Localizar paciente, enviar laudo, acompanhar gestão de envio de forma rápida"
@@ -73,6 +76,8 @@ export default function App() {
 
       <div className="mt-5 space-y-5 sm:mt-6 sm:space-y-6 lg:mt-8">
       <SearchCard examTypes={examTypes.data} onSearch={p.search} />
+
+      <DuplicidadeBanner patients={p.allPatients} onSelect={setDupOf} />
 
       <Card className="p-4 lg:p-6">
         {/* Tabela a partir de 1024px; cartões abaixo disso. */}
@@ -103,6 +108,8 @@ export default function App() {
         onSave={handleSave}
         onClose={() => setEditing(null)}
       />
+
+      <DuplicidadeModal patient={dupOf} onClose={() => setDupOf(null)} />
 
       <UploadLaudoModal patient={uploading} onSend={handleSendLaudo} onClose={() => setUploading(null)} />
 

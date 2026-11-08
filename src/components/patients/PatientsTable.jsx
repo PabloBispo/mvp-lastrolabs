@@ -24,7 +24,7 @@ export default function PatientsTable({
   onColumnFiltersChange,
   onEnviar,
   onEdit,
-  onDelete,
+  onDuplicidade,
 }) {
   const sortFor = (key, label) => (
     <SortButton label={label} direction={sort.key === key ? sort.dir : null} onClick={() => onSortChange(key)} />
@@ -83,7 +83,7 @@ export default function PatientsTable({
                 sending={sendingIds.includes(p.id)}
                 onEnviar={onEnviar}
                 onEdit={onEdit}
-                onDelete={onDelete}
+                onDuplicidade={onDuplicidade}
               />
             ))
           )}

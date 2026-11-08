@@ -1,22 +1,24 @@
 import StatusBadge from '../ui/StatusBadge.jsx';
 import LaudoCell from './LaudoCell.jsx';
 import RowActions from './RowActions.jsx';
+import DuplicidadeChip from './DuplicidadeChip.jsx';
 
 /** Versão em cartão de uma linha da tabela, usada abaixo de 1024px. */
-export default function PatientCard({ patient, sending, onEnviar, onEdit, onDelete }) {
+export default function PatientCard({ patient, sending, onEnviar, onEdit, onDuplicidade }) {
   return (
     <li className="min-w-0 rounded-lg border border-slate-200 bg-white p-4">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="line-clamp-2 text-[15px] font-medium text-slate-800">{patient.nome}</p>
           <p className="mt-0.5 truncate text-sm text-slate-500">{patient.exame}</p>
+          <DuplicidadeChip dup={patient.duplicidade} onClick={() => onDuplicidade(patient)} />
           {patient.guia && <p className="mt-0.5 truncate text-xs text-slate-400">Guia {patient.guia} · Solic. {patient.solicitante}</p>}
         </div>
         <StatusBadge status={patient.status} />
       </div>
       <div className="mt-4 flex items-center justify-between gap-3">
         <LaudoCell enviado={patient.enviado} sending={sending} onEnviar={() => onEnviar(patient)} />
-        <RowActions patientName={patient.nome} onEdit={() => onEdit(patient)} onDelete={() => onDelete(patient)} />
+        <RowActions patientName={patient.nome} onEdit={() => onEdit(patient)} />
       </div>
     </li>
   );

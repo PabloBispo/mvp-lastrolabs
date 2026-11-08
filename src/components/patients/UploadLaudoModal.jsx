@@ -74,6 +74,13 @@ export default function UploadLaudoModal({ patient, onSend, onClose }) {
           </div>
         </div>
 
+        {patient.duplicidade && (
+          <div className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-xs text-amber-900">
+            <span className="font-semibold">Atenção: exame repetido.</span> {patient.exame} feito há {patient.duplicidade.dias} dias em{' '}
+            {patient.duplicidade.prestador}. O alerta segue junto com este laudo para a operadora.
+          </div>
+        )}
+
         <label className="flex cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-slate-300 px-4 py-6 text-center hover:border-lastro-teal">
           <span className="font-medium text-slate-800">Anexar laudo e evidência</span>
           <span className="text-xs text-slate-500">PDF do laudo, imagem DICOM ou foto da tela do aparelho</span>

@@ -12,7 +12,7 @@
 import { SEED } from './seed.js';
 import { STATUS } from '../components/ui/StatusBadge.jsx';
 
-const STORAGE_KEY = 'lastro-labs-demo:v2';
+const STORAGE_KEY = 'lastro-labs-demo:v3';
 const LATENCY_MS = { min: 250, max: 600 };
 
 const clone = (v) => JSON.parse(JSON.stringify(v));

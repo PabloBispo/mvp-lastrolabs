@@ -54,6 +54,7 @@ export default function usePatients({ initialPageSize = 4 } = {}) {
     error,
     reload,
     pageItems,
+    allPatients: patients,
     totalCount: visible.length,
     page: currentPage,
     totalPages,

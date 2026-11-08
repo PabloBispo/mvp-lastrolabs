@@ -28,7 +28,7 @@ export default function PatientCardList({
   onColumnFiltersChange,
   onEnviar,
   onEdit,
-  onDelete,
+  onDuplicidade,
 }) {
   const setFilter = (key) => (sel) => onColumnFiltersChange({ ...columnFilters, [key]: sel });
 
@@ -63,7 +63,7 @@ export default function PatientCardList({
               sending={sendingIds.includes(p.id)}
               onEnviar={onEnviar}
               onEdit={onEdit}
-              onDelete={onDelete}
+              onDuplicidade={onDuplicidade}
             />
           ))
         )}
