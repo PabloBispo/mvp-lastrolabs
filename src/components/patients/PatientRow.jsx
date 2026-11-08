@@ -8,8 +8,13 @@ export const CELL = 'border-r border-slate-200 px-4 xl:px-6';
 export default function PatientRow({ patient, striped, sending, onEnviar, onEdit, onDelete }) {
   return (
     <tr className={`h-14 border-b border-slate-200 ${striped ? 'bg-row' : 'bg-white'}`}>
-      <td className={`${CELL} truncate`} title={patient.nome}>
-        {patient.nome}
+      <td className={`${CELL} py-2`} title={patient.nome}>
+        <div className="truncate">{patient.nome}</div>
+        {patient.guia && (
+          <div className="truncate text-xs text-slate-400">
+            Guia {patient.guia} · Solic. {patient.solicitante}
+          </div>
+        )}
       </td>
       <td className={`${CELL} truncate`} title={patient.exame}>
         {patient.exame}

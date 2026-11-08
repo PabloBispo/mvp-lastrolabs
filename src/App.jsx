@@ -7,6 +7,7 @@ import ConfirmDialog from './components/ui/ConfirmDialog.jsx';
 import { useToast } from './components/ui/Toast.jsx';
 import PatientsTable from './components/patients/PatientsTable.jsx';
 import PatientFormModal from './components/patients/PatientFormModal.jsx';
+import UploadLaudoModal from './components/patients/UploadLaudoModal.jsx';
 import PatientCardList from './components/patients/PatientCardList.jsx';
 import Pagination from './components/pagination/Pagination.jsx';
 import usePatients from './hooks/usePatients.js';
@@ -23,6 +24,7 @@ export default function App() {
 
   const [editing, setEditing] = useState(null);
   const [deleting, setDeleting] = useState(null);
+  const [uploading, setUploading] = useState(null);
   const [confirmReset, setConfirmReset] = useState(false);
 
   // Envolve uma ação da API mock com aviso de sucesso/erro.
@@ -36,8 +38,8 @@ export default function App() {
     }
   };
 
-  const handleEnviar = (patient) =>
-    run(() => p.enviarLaudo(patient.id), `Laudo de ${patient.nome} enviado`)().catch(() => {});
+  const handleSendLaudo = (patient, evidencia) =>
+    run(() => p.enviarLaudo(patient.id, evidencia), `Laudo de ${patient.nome} enviado para análise`)();
 
   const handleSave = run(p.update, 'Paciente atualizado');
   const handleDelete = run(() => p.remove(deleting.id), 'Paciente excluído');
@@ -57,7 +59,7 @@ export default function App() {
     sort: p.sort,
     columnFilters: p.columnFilters,
     onColumnFiltersChange: p.setColumnFilters,
-    onEnviar: handleEnviar,
+    onEnviar: setUploading,
     onEdit: setEditing,
     onDelete: setDeleting,
   };
@@ -102,6 +104,8 @@ export default function App() {
         onClose={() => setEditing(null)}
       />
 
+      <UploadLaudoModal patient={uploading} onSend={handleSendLaudo} onClose={() => setUploading(null)} />
+
       <ConfirmDialog
         open={!!deleting}
         title="Excluir paciente"
@@ -114,7 +118,7 @@ export default function App() {
       <ConfirmDialog
         open={confirmReset}
         title="Restaurar dados iniciais"
-        message="Todas as alterações feitas (laudos enviados, edições e exclusões) serão desfeitas."
+        message="Todas as alterações feitas (laudos enviados e edições) serão desfeitas."
         confirmLabel="Restaurar"
         onConfirm={handleReset}
         onClose={() => setConfirmReset(false)}

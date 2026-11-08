@@ -3,7 +3,6 @@ import Modal from '../ui/Modal.jsx';
 import Button from '../ui/Button.jsx';
 import TextInput from '../ui/TextInput.jsx';
 import Select from '../ui/Select.jsx';
-import { STATUS_OPTIONS } from './PatientsTable.jsx';
 import { maskCpf } from '../../utils/cpf.js';
 
 /** Formulário de edição de um paciente. */
@@ -12,7 +11,7 @@ export default function PatientFormModal({ patient, examTypes, onSave, onClose }
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    if (patient) setForm({ nome: patient.nome, cpf: patient.cpf, exame: patient.exame, status: patient.status });
+    if (patient) setForm({ nome: patient.nome, cpf: patient.cpf, exame: patient.exame });
   }, [patient]);
 
   if (!patient || !form) return null;
@@ -68,10 +67,6 @@ export default function PatientFormModal({ patient, examTypes, onSave, onClose }
         <label className="block space-y-1.5">
           <span>Tipo de exame</span>
           <Select options={examTypes} value={form.exame} onChange={set('exame')} />
-        </label>
-        <label className="block space-y-1.5">
-          <span>Status do envio</span>
-          <Select options={STATUS_OPTIONS} value={form.status} onChange={set('status')} />
         </label>
       </form>
     </Modal>

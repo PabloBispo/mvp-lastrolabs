@@ -10,8 +10,9 @@
 // funções com fetch() mantendo as mesmas assinaturas.
 // ─────────────────────────────────────────────────────────────
 import { SEED } from './seed.js';
+import { STATUS } from '../components/ui/StatusBadge.jsx';
 
-const STORAGE_KEY = 'lastro-labs-demo:v1';
+const STORAGE_KEY = 'lastro-labs-demo:v2';
 const LATENCY_MS = { min: 250, max: 600 };
 
 const clone = (v) => JSON.parse(JSON.stringify(v));
@@ -60,10 +61,13 @@ export const api = {
     return clone(db.patients);
   },
 
-  /** Marca o laudo como enviado. */
-  async sendReport(id) {
+  /** Anexa o laudo/evidência (com hash SHA-256) e manda para análise da operadora. */
+  async sendReport(id, evidencia) {
     await wait();
-    findPatient(id).enviado = true;
+    const p = findPatient(id);
+    p.enviado = true;
+    p.status = STATUS.EM_ANALISE;
+    p.evidencia = evidencia ?? null;
     persist();
     return clone(findPatient(id));
   },

@@ -80,10 +80,10 @@ export default function usePatients({ initialPageSize = 4 } = {}) {
         s.key !== key ? { key, dir: 'asc' } : s.dir === 'asc' ? { key, dir: 'desc' } : { key: null, dir: null },
       ),
 
-    async enviarLaudo(id) {
+    async enviarLaudo(id, evidencia) {
       setSendingIds((ids) => [...ids, id]);
       try {
-        replace(await api.sendReport(id));
+        replace(await api.sendReport(id, evidencia));
       } finally {
         setSendingIds((ids) => ids.filter((x) => x !== id));
       }

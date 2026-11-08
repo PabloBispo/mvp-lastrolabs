@@ -6,7 +6,7 @@ import SkeletonRows from './SkeletonRows.jsx';
 import { STATUS } from '../ui/StatusBadge.jsx';
 
 export const LAUDO_OPTIONS = ['Enviar', 'Enviado'];
-export const STATUS_OPTIONS = [STATUS.CONCLUIDO, STATUS.EM_ANDAMENTO];
+export const STATUS_OPTIONS = [STATUS.PENDENTE, STATUS.EM_ANALISE, STATUS.APROVADO, STATUS.CORRECAO];
 
 /**
  * Tabela de pacientes com ordenação e filtros por coluna.
@@ -58,7 +58,7 @@ export default function PatientsTable({
               Laudo
             </TableHeaderCell>
             <TableHeaderCell actions={<>{filterFor('status', 'status', STATUS_OPTIONS)}{sortFor('status', 'status')}</>}>
-              Status do envio
+              Status
             </TableHeaderCell>
             <th className="px-4 py-3 xl:px-6">
               <span className="sr-only">Ações</span>

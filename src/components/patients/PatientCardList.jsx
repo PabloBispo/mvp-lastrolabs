@@ -9,8 +9,8 @@ const SORT_OPTIONS = [
   { value: 'exame:desc', label: 'Tipo de exame (Z–A)' },
   { value: 'laudo:asc', label: 'Laudo: enviados primeiro' },
   { value: 'laudo:desc', label: 'Laudo: a enviar primeiro' },
-  { value: 'status:asc', label: 'Status: concluídos primeiro' },
-  { value: 'status:desc', label: 'Status: em andamento primeiro' },
+  { value: 'status:asc', label: 'Status: A → Z' },
+  { value: 'status:desc', label: 'Status: Z → A' },
 ];
 
 /**

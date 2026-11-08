@@ -10,6 +10,7 @@ export default function PatientCard({ patient, sending, onEnviar, onEdit, onDele
         <div className="min-w-0">
           <p className="line-clamp-2 text-[15px] font-medium text-slate-800">{patient.nome}</p>
           <p className="mt-0.5 truncate text-sm text-slate-500">{patient.exame}</p>
+          {patient.guia && <p className="mt-0.5 truncate text-xs text-slate-400">Guia {patient.guia} · Solic. {patient.solicitante}</p>}
         </div>
         <StatusBadge status={patient.status} />
       </div>
