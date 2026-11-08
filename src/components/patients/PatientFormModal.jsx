@@ -6,8 +6,6 @@ import Select from '../ui/Select.jsx';
 import { STATUS_OPTIONS } from './PatientsTable.jsx';
 import { maskCpf } from '../../utils/cpf.js';
 
-const FIELD = 'h-9 w-full text-sm';
-
 /** Formulário de edição de um paciente. */
 export default function PatientFormModal({ patient, examTypes, onSave, onClose }) {
   const [form, setForm] = useState(null);
@@ -55,7 +53,7 @@ export default function PatientFormModal({ patient, examTypes, onSave, onClose }
       <form id="patient-form" onSubmit={submit} className="space-y-4 text-xs text-slate-700">
         <label className="block space-y-1.5">
           <span>Nome</span>
-          <TextInput value={form.nome} onChange={set('nome')} className={FIELD} autoFocus />
+          <TextInput value={form.nome} onChange={set('nome')} autoFocus />
         </label>
         <label className="block space-y-1.5">
           <span>CPF</span>
@@ -64,16 +62,16 @@ export default function PatientFormModal({ patient, examTypes, onSave, onClose }
             inputMode="numeric"
             maxLength={14}
             onChange={(e) => setForm({ ...form, cpf: maskCpf(e.target.value) })}
-            className={FIELD}
+           
           />
         </label>
         <label className="block space-y-1.5">
           <span>Tipo de exame</span>
-          <Select options={examTypes} value={form.exame} onChange={set('exame')} selectClassName={`${FIELD} rounded-md border border-slate-300 px-2`} />
+          <Select options={examTypes} value={form.exame} onChange={set('exame')} />
         </label>
         <label className="block space-y-1.5">
           <span>Status do envio</span>
-          <Select options={STATUS_OPTIONS} value={form.status} onChange={set('status')} selectClassName={`${FIELD} rounded-md border border-slate-300 px-2`} />
+          <Select options={STATUS_OPTIONS} value={form.status} onChange={set('status')} />
         </label>
       </form>
     </Modal>

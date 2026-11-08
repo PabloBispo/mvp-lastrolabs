@@ -54,9 +54,10 @@ export default function App() {
         subtitle="Localizar paciente, enviar laudo, acompanhar gestão de envio de forma rápida"
       />
 
+      <div className="mt-6 space-y-6 lg:mt-8">
       <SearchCard examTypes={examTypes.data} onSearch={p.search} />
 
-      <Card className="mt-9 rounded-xl p-4">
+      <Card className="p-4 lg:p-6">
         <PatientsTable
           patients={p.pageItems}
           loading={p.loading}
@@ -73,12 +74,14 @@ export default function App() {
         <Pagination
           page={p.page}
           totalPages={p.totalPages}
+          totalCount={p.totalCount}
           onPageChange={p.setPage}
           pageSize={p.pageSize}
           pageSizeOptions={PAGE_SIZE_OPTIONS}
           onPageSizeChange={p.setPageSize}
         />
       </Card>
+      </div>
 
       <PatientFormModal
         patient={editing}

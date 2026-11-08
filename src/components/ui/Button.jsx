@@ -2,12 +2,11 @@ const VARIANTS = {
   primary: 'bg-lastro-navy text-white hover:bg-lastro-deep disabled:opacity-60',
   secondary: 'border border-slate-300 bg-white text-slate-700 hover:border-lastro-teal',
   danger: 'bg-red-600 text-white hover:bg-red-700 disabled:opacity-60',
-  disabled: 'bg-slate-300 text-slate-600',
 };
 
 const SIZES = {
-  sm: 'h-7 px-4 text-[11px]',
-  md: 'h-9 px-5 text-sm',
+  sm: { button: 'h-8 px-3.5 text-xs', icon: 'h-3 w-3' },
+  md: { button: 'h-10 px-5 text-sm', icon: 'h-4 w-4' },
 };
 
 /** Botão de ação (Buscar, Enviar, Salvar…). */
@@ -21,11 +20,11 @@ export default function Button({
 }) {
   return (
     <button
-      className={`inline-flex items-center justify-center gap-1.5 rounded-md font-medium transition disabled:cursor-default ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-md font-medium transition disabled:cursor-default ${VARIANTS[variant]} ${SIZES[size].button} ${className}`}
       {...props}
     >
       {children}
-      {IconComponent && <IconComponent className="h-3 w-3" />}
+      {IconComponent && <IconComponent className={SIZES[size].icon} />}
     </button>
   );
 }

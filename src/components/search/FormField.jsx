@@ -1,11 +1,11 @@
-/** Rótulo + controle lado a lado, como no painel de filtro. */
-export default function FormField({ label, htmlFor, labelClassName = '', children }) {
+/** Rótulo acima do controle. */
+export default function FormField({ label, htmlFor, className = '', children }) {
   return (
-    <>
-      <label htmlFor={htmlFor} className={`text-xs text-slate-700 ${labelClassName}`}>
+    <div className={`min-w-0 ${className}`}>
+      <label htmlFor={htmlFor} className="mb-1.5 block text-xs font-medium text-slate-600">
         {label}
       </label>
       {children}
-    </>
+    </div>
   );
 }

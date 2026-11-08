@@ -5,13 +5,13 @@ import { ArrowUpRightIcon } from '../icons/Icons.jsx';
 export default function LaudoCell({ enviado, sending, onEnviar }) {
   if (enviado) {
     return (
-      <span className="inline-flex h-7 w-[68px] items-center justify-center rounded bg-slate-300 text-[10px] font-medium text-slate-600">
+      <span className="inline-flex h-8 w-[88px] items-center justify-center rounded-md bg-slate-200 text-xs font-medium text-slate-500">
         Enviado
       </span>
     );
   }
   return (
-    <Button onClick={onEnviar} disabled={sending} icon={sending ? undefined : ArrowUpRightIcon} className="min-w-[74px] rounded">
+    <Button onClick={onEnviar} disabled={sending} icon={sending ? undefined : ArrowUpRightIcon} className="w-[88px]">
       {sending ? 'Enviando…' : 'Enviar'}
     </Button>
   );

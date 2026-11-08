@@ -11,7 +11,7 @@ const STYLES = {
 /** Selo arredondado do status de envio. */
 export default function StatusBadge({ status }) {
   return (
-    <span className={`inline-flex rounded-full border px-3 py-0.5 text-xs ${STYLES[status] ?? 'border-slate-300 bg-slate-100'}`}>
+    <span className={`inline-flex whitespace-nowrap rounded-full border px-3 py-0.5 text-xs ${STYLES[status] ?? 'border-slate-300 bg-slate-100'}`}>
       {status}
     </span>
   );

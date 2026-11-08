@@ -19,15 +19,19 @@ export default function SearchCard({ examTypes, onSearch }) {
   };
 
   return (
-    <Card className="mt-12 px-4 py-5 sm:px-7">
-      <h2 className="text-base font-semibold text-[#3D3A55]">Buscar paciente</h2>
-      <form className="mt-6" onSubmit={handleSubmit}>
-        <FilterPanel values={draft} onChange={setDraft} examTypes={examTypes} />
-        <div className="mt-4 flex justify-end">
-          <Button type="submit" icon={SearchIcon}>
-            Buscar
-          </Button>
-        </div>
+    <Card className="p-5 lg:p-6">
+      <h2 className="text-lg font-semibold text-[#3D3A55]">Buscar paciente</h2>
+      <form className="mt-4" onSubmit={handleSubmit}>
+        <FilterPanel
+          values={draft}
+          onChange={setDraft}
+          examTypes={examTypes}
+          action={
+            <Button type="submit" size="md" icon={SearchIcon} className="w-full md:w-auto">
+              Buscar
+            </Button>
+          }
+        />
       </form>
     </Card>
   );

@@ -8,7 +8,11 @@ import { STATUS } from '../ui/StatusBadge.jsx';
 export const LAUDO_OPTIONS = ['Enviar', 'Enviado'];
 export const STATUS_OPTIONS = [STATUS.CONCLUIDO, STATUS.EM_ANDAMENTO];
 
-/** Tabela de pacientes com ordenação e filtros por coluna. */
+/**
+ * Tabela de pacientes com ordenação e filtros por coluna.
+ * Colunas em proporção (table-fixed) para acompanhar a largura da tela;
+ * abaixo de 760px a tabela rola na horizontal em vez de espremer.
+ */
 export default function PatientsTable({
   patients,
   loading = false,
@@ -36,36 +40,37 @@ export default function PatientsTable({
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[880px] border-collapse text-left">
+      <table className="w-full min-w-[760px] table-fixed border-collapse text-left">
+        {/* Laudo, Status e Ações têm conteúdo de largura conhecida → px fixos.
+            Nome e Tipo de exame dividem o restante (55/45). */}
+        <colgroup>
+          <col className="w-[55%]" />
+          <col className="w-[45%]" />
+          <col className="w-[140px] xl:w-[170px]" />
+          <col className="w-[184px] xl:w-[210px]" />
+          <col className="w-[116px] xl:w-[136px]" />
+        </colgroup>
         <thead>
-          <tr className="text-[13px] text-slate-600">
-            <TableHeaderCell className="w-[256px]">Nome do Paciente</TableHeaderCell>
-            <TableHeaderCell className="w-[230px]" actions={sortFor('exame', 'tipo de exame')}>
-              Tipo de exame
-            </TableHeaderCell>
-            <TableHeaderCell
-              className="w-[197px]"
-              actions={<>{filterFor('laudo', 'laudo', LAUDO_OPTIONS)}{sortFor('laudo', 'laudo')}</>}
-            >
+          <tr className="text-[13px] text-slate-500">
+            <TableHeaderCell>Nome do Paciente</TableHeaderCell>
+            <TableHeaderCell actions={sortFor('exame', 'tipo de exame')}>Tipo de exame</TableHeaderCell>
+            <TableHeaderCell actions={<>{filterFor('laudo', 'laudo', LAUDO_OPTIONS)}{sortFor('laudo', 'laudo')}</>}>
               Laudo
             </TableHeaderCell>
-            <TableHeaderCell
-              className="w-[197px]"
-              actions={<>{filterFor('status', 'status', STATUS_OPTIONS)}{sortFor('status', 'status')}</>}
-            >
+            <TableHeaderCell actions={<>{filterFor('status', 'status', STATUS_OPTIONS)}{sortFor('status', 'status')}</>}>
               Status do envio
             </TableHeaderCell>
-            <th className="px-6 py-3">
+            <th className="px-4 py-3 xl:px-6">
               <span className="sr-only">Ações</span>
             </th>
           </tr>
         </thead>
-        <tbody className="text-[15px] text-slate-700">
+        <tbody className="text-sm text-slate-700 lg:text-[15px]">
           {loading ? (
             <SkeletonRows count={skeletonCount} />
           ) : patients.length === 0 ? (
             <tr>
-              <td colSpan={5} className="px-6 py-10 text-center text-sm text-slate-500">
+              <td colSpan={5} className="px-6 py-12 text-center text-sm text-slate-500">
                 Nenhum paciente encontrado.
               </td>
             </tr>
